@@ -1,8 +1,36 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import SearchBar from "../components/SearchBar";
+// import SearchBar from "../components/SearchBar";
 
 const Home: NextPage = () => {
+  const handelSubmit = async (e: any) => {
+    e.preventDefault();
+
+    const searchTerm = {
+      search: "List : " + e.target.search.value,
+    };
+
+    // console.log(searchTerm);
+
+    // remove this later
+    const endpoint = "/api/form";
+
+    try {
+      // add the endpoint here from .env
+      const res = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(searchTerm.search),
+      });
+      const data = await res.json();
+      console.log("This is the response" + data);
+    } catch (error) {
+      console.log("Catch block: " + error);
+    }
+  };
+
   return (
     <>
       <Head>
@@ -14,14 +42,28 @@ const Home: NextPage = () => {
         <h1 className="text-5xl font-extrabold tracking-tight text-gray-800">
           Find <span className="text-[#E72D01]">Your</span> Food
         </h1>
-        <div className="text-center">
-          <SearchBar />
-        </div>
-        <div>
-          <button className="w-36 rounded-3xl bg-[#E72D01] py-2 px-4 font-bold text-white max-sm:w-28">
-            Search
-          </button>
-        </div>
+        <form
+          className="flex flex-col gap-10 text-center"
+          onSubmit={handelSubmit}
+        >
+          <div>
+            <input
+              className="w-96 rounded-3xl  bg-slate-400/10 py-2 px-4 text-gray-700 hover:bg-white max-sm:w-72"
+              placeholder="Search Bar"
+              id="search"
+              name="search"
+              required
+            ></input>
+          </div>
+          <div>
+            <button
+              type="submit"
+              className="w-36 rounded-3xl bg-[#E72D01] py-2 px-4 font-bold text-white max-sm:w-28 "
+            >
+              Search
+            </button>
+          </div>
+        </form>
       </main>
     </>
   );
