@@ -1,4 +1,5 @@
 import React from 'react'
+<<<<<<< HEAD
 import GptCard from '../../components/GptCard';
 
 import IFoodType from '../../interfaces/IFoodType';
@@ -56,3 +57,15 @@ const Restaurants = (props: Props) => {
 }
 
 export default Restaurants
+=======
+
+type Props = {}
+
+const index = (props: Props) => {
+  return (
+    <div>index</div>
+  )
+}
+
+export default index
+>>>>>>> abcaf5ad720a267fad87b7d2d908cdda711a0f84

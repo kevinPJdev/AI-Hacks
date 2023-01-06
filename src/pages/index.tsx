@@ -1,13 +1,20 @@
 import { type NextPage } from "next";
 import Head from "next/head";
+<<<<<<< HEAD
 // import SearchBar from "../components/SearchBar";
 import Restaurants from "./restaurants";
 
 const Home: NextPage = () => {
+=======
+
+const Home: NextPage = () => {
+
+>>>>>>> abcaf5ad720a267fad87b7d2d908cdda711a0f84
   const handelSubmit = async (e: any) => {
     e.preventDefault();
 
     const searchTerm = {
+<<<<<<< HEAD
       search: "List : " + e.target.search.value,
     };
 
@@ -30,6 +37,39 @@ const Home: NextPage = () => {
     } catch (error) {
       console.log("Catch block: " + error);
     }
+=======
+      search: "List 3 food dishes that have the following description: " + e.target.search.value,
+    };
+
+    console.log(searchTerm);
+
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/completions`,
+          {
+            method: "POST",
+            headers: {
+              // THis below line avoids "user AGENT error and 400 error"
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${process.env.NEXT_PUBLIC_OPENAI_API_KEY}`,
+            },
+            body: JSON.stringify({
+              model: "text-davinci-003",
+              prompt: searchTerm.search,
+              max_tokens: 70,
+              temperature: 0,
+            }),
+          }
+      );
+  
+      const data = await response.json();
+      console.log(data.choices[0].text);
+
+    } catch(error) {
+      console.log(error);
+    }
+
+>>>>>>> abcaf5ad720a267fad87b7d2d908cdda711a0f84
   };
 
   return (
@@ -40,7 +80,35 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex min-h-screen flex-col items-center justify-center gap-10 bg-[#EFEFEF]">
+<<<<<<< HEAD
         <Restaurants />
+=======
+        <h1 className="text-5xl font-extrabold tracking-tight text-gray-800">
+          Find <span className="text-[#E72D01]">Your</span> Food
+        </h1>
+        <form
+          className="flex flex-col gap-10 text-center"
+          onSubmit={handelSubmit}
+        >
+          <div>
+            <input
+              className="w-96 rounded-3xl  bg-slate-400/10 py-2 px-4 text-gray-700 hover:bg-white max-sm:w-72"
+              placeholder="Search Bar"
+              id="search"
+              name="search"
+              required
+            ></input>
+          </div>
+          <div>
+            <button
+              type="submit"
+              className="w-36 rounded-3xl bg-[#E72D01] py-2 px-4 font-bold text-white max-sm:w-28 "
+            >
+              Search
+            </button>
+          </div>
+        </form>
+>>>>>>> abcaf5ad720a267fad87b7d2d908cdda711a0f84
       </main>
     </>
   );
