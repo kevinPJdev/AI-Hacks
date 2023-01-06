@@ -1,6 +1,7 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 // import SearchBar from "../components/SearchBar";
+import Restaurants from "./restaurants";
 
 const Home: NextPage = () => {
   const handelSubmit = async (e: any) => {
@@ -39,31 +40,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex min-h-screen flex-col items-center justify-center gap-10 bg-[#EFEFEF]">
-        <h1 className="text-5xl font-extrabold tracking-tight text-gray-800">
-          Find <span className="text-[#E72D01]">Your</span> Food
-        </h1>
-        <form
-          className="flex flex-col gap-10 text-center"
-          onSubmit={handelSubmit}
-        >
-          <div>
-            <input
-              className="w-96 rounded-3xl  bg-slate-400/10 py-2 px-4 text-gray-700 hover:bg-white max-sm:w-72"
-              placeholder="Search Bar"
-              id="search"
-              name="search"
-              required
-            ></input>
-          </div>
-          <div>
-            <button
-              type="submit"
-              className="w-36 rounded-3xl bg-[#E72D01] py-2 px-4 font-bold text-white max-sm:w-28 "
-            >
-              Search
-            </button>
-          </div>
-        </form>
+        <Restaurants />
       </main>
     </>
   );
